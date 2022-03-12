@@ -2,9 +2,11 @@
   "name": "react-termynal",
   "version": "0.0.1",
   "description": "A nice greeter",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "dev": "react-scripts start",
+    "rollup": "rollup -c",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
@@ -13,7 +15,9 @@
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -21,21 +25,43 @@
   },
   "author": "rahon",
   "license": "MIT",
-  "keywords": ["react", "termynal", "typescript"],
+  "keywords": [
+    "react",
+    "termynal",
+    "typescript"
+  ],
   "bugs": {
     "url": "https://github.com/rahonix/react-termynal/issues"
   },
   "homepage": "https://github.com/rahonix/react-termynal#readme",
   "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/react": "^6.4.19",
+    "@storybook/testing-library": "^0.0.9",
     "@types/jest": "^27.4.1",
+    "@types/react": "^17.0.40",
+    "babel-loader": "^8.2.3",
     "jest": "^27.5.1",
     "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.70.0",
+    "rollup-plugin-dts": "^4.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
     "ts-jest": "^27.1.3",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.6.2"
   },
+  "module": "dist/esm/index.js",
   "files": [
-    "lib/**/*"
+    "dist"
   ]
 }
