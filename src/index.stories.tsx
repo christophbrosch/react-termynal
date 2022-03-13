@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Termynal } from ".";
+import { Termynal, Input, Plain } from ".";
 
 export default {
     title: "ReactComponentLibrary/Termynal",
@@ -8,14 +8,41 @@ export default {
 } as ComponentMeta<typeof Termynal>;
 
 const Template: ComponentStory<typeof Termynal> = (args) => <Termynal {...args} />
+const ContainerTemplate: ComponentStory<any> = (args) => 
+  <div style={{
+    position: "relative",
+    height: "200px"
+  }}>
+    <Termynal {...args} />
+  </div>
 
-export const HelloWorld = Template.bind({});
+export const basic = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-HelloWorld.args = {
-  id: "#123",
+basic.args = {
+  id: "container",
+  children: 
+  <>
+    <Input content={"How are you doing?"}/>
+  </>
+  
 };
 
-export const ClickMe = Template.bind({});
-ClickMe.args = {
-  id: "Click me!",
+export const container = ContainerTemplate.bind({});
+container.args = {
+  id: "container",
+  children: 
+  <>
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+    <Plain content={"Alot of text that is shown here"} />
+  </>
+  
 };

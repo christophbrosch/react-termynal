@@ -79,23 +79,21 @@ class Termynal {
         for (let line of this.lines) {
             const type = line.getAttribute(this.pfx);
             const delay = line.getAttribute(`${this.pfx}-delay`) || this.lineDelay;
-
+            
             if (type == 'input') {
                 line.setAttribute(`${this.pfx}-cursor`, this.cursor);
                 await this.type(line);
-                await this._wait(delay);
             }
-
+            
             else if (type == 'progress') {
                 await this.progress(line);
-                await this._wait(delay);
             }
-
+            
             else {
                 this.container.appendChild(line);
-                await this._wait(delay);
             }
-
+            this.container.scrollTop = this.container.scrollHeight
+            await this._wait(delay);
             line.removeAttribute(`${this.pfx}-cursor`);
         }
     }

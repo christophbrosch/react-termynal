@@ -20,17 +20,18 @@
     font-size: 18px;
     font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
     border-radius: 4px;
-    padding: 75px 45px 35px;
+    padding: 75px 45px 15px;
     position: relative;
+    overflow: hidden;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
 }
 
 [data-termynal]:before {
     content: '';
-    position: absolute;
-    top: 15px;
-    left: 15px;
+    position: fixed;
+    top: 25px;
+    left: 25px;
     display: inline-block;
     width: 15px;
     height: 15px;
@@ -43,12 +44,13 @@
 
 [data-termynal]:after {
     content: 'bash';
-    position: absolute;
+    position: fixed;
     color: var(--color-text-subtle);
-    top: 5px;
+    top: 25px;
     left: 0;
     width: 100%;
     text-align: center;
+
 }
 
 [data-ty] {
