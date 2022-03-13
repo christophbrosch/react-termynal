@@ -1,7 +1,6 @@
 import React from "react";
-import { ReactComponentElement, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { default as TermynalClass } from "./termynal";
-import { Typography, TypographyProps } from "@mui/material";
 import "./termynal.css";
 
 type TermynalProps = {
@@ -13,56 +12,59 @@ type TermynalProps = {
         progressLength: number,
         progressChard: string,
         progressPercent: number,
-        cursor: ReactNode
+        cursor: ReactNode,
+        autoScrole: boolean
     },
     children?: any
+}
+
+
+type TermynalLineProps = {
+    type: "window" | "input" | "plain" | "progress",
+    prompt?: string,
+    children?: any,
+}
+
+type ContentType = {
+    children: ReactNode,
+    prompt?: string,
 }
 
 const Termynal = (props: TermynalProps) => {
 
     useEffect(() => {
+        /* tslint:disable:no-unused-expression */
         new TermynalClass("#" + props.id)
     }, [])
 
     return (
-        <div 
-          id={props.id} 
-          data-termynal 
-          style={{
-            height: "100%",
-            width: "100%",
-            overflow: "scroll",
-          }}>
-            {props.children}
-        </div>
+            <div 
+            id={props.id} 
+            data-termynal 
+            style={{
+                height: "100%",
+                width: "100%",
+            }}>
+                {props.children}
+            </div>
     )
 }
 
-type TermynalLineProps = {
-    type: "window" | "input" | "plain" | "progress",
-    prompt?: string,
-    content?: any,
-    options?: TypographyProps
-}
-
-const Line = ({type, prompt, content, options}: TermynalLineProps) =>{ 
+const Line = ({type, prompt, children}: TermynalLineProps) =>{ 
     return (
-        <Typography
+        <span
             data-ty={type}
-            data-prompt={prompt}
-            {...options}
-        >
-            {content}
-        </Typography>
-    )
+            data-ty-prompt={prompt}
+            >
+                {children}
+        </span>
+    )        
 }
 
-type ContentType = {
-    content: string,
-    options?: TypographyProps
-}
-const Input = ({content, options}: ContentType) => <Line type="input" prompt="$" content={content} options={options}/>
-const Plain = ({content, options}: ContentType) => <Line type="plain" content={content} options={options}/>
+const Input = ({children, prompt}: ContentType) => 
+    <Line type="input" prompt={prompt} children={children}/>
+const Plain = ({children, prompt}: ContentType) => 
+    <Line type="plain" prompt={prompt} children={children}/>
 
 export {
     Termynal,

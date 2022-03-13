@@ -26,6 +26,7 @@ declare class Termynal {
     progressChar: any;
     progressPercent: any;
     cursor: any;
+    autoScrole: any;
     lineData: Element[];
     /**
      * Initialise the widget, get lines, clear container and start animation.

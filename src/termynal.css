@@ -20,7 +20,7 @@
     font-size: 18px;
     font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
     border-radius: 4px;
-    padding: 75px 45px 15px;
+    padding: 45px 0 15px 45px;
     position: relative;
     overflow: hidden;
     -webkit-box-sizing: border-box;

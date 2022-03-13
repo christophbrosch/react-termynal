@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Termynal, Input, Plain } from ".";
 
@@ -22,7 +22,6 @@ basic.args = {
   id: "container",
   children: 
   <>
-    <Input content={"How are you doing?"}/>
   </>
   
 };
@@ -32,17 +31,25 @@ container.args = {
   id: "container",
   children: 
   <>
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
-    <Plain content={"Alot of text that is shown here"} />
+    <Plain>
+      <p> HI </p>
+    </Plain>
+    <Plain>
+      <p> HI </p>
+    </Plain>
+    <Plain>
+      <p> HI </p>
+    </Plain>
+    <Plain>
+      <p> HI </p>
+    </Plain>
   </>
   
 };
+
+const _text = [
+  "Hello",
+  "Good",
+  "People",
+  "Of this wonderful town"
+]

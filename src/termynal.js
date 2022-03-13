@@ -1,12 +1,12 @@
 /**
- * termynal.js
- * A lightweight, modern and extensible animated terminal window, using
- * async/await.
- *
- * @author Ines Montani <ines@ines.io>
- * @version 0.0.1
- * @license MIT
- */
+  * termynal.js
+  * A lightweight, modern and extensible animated terminal window, using
+  * async/await.
+  *
+  * @author Ines Montani <ines@ines.io>
+  * @version 0.0.1
+  * @license MIT
+  **/
 
 'use strict';
 
@@ -30,20 +30,21 @@ class Termynal {
     constructor(container = '#termynal', options = {}) {
         this.container = (typeof container === 'string') ? document.querySelector(container) : container;
         this.pfx = `data-${options.prefix || 'ty'}`;
-        this.startDelay = options.startDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 600;
-        this.typeDelay = options.typeDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
-        this.lineDelay = options.lineDelay
-            || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
-        this.progressLength = options.progressLength
-            || parseFloat(this.container.getAttribute(`${this.pfx}-progressLength`)) || 40;
-        this.progressChar = options.progressChar
-            || this.container.getAttribute(`${this.pfx}-progressChar`) || '█';
-		this.progressPercent = options.progressPercent
-            || parseFloat(this.container.getAttribute(`${this.pfx}-progressPercent`)) || 100;
-        this.cursor = options.cursor
-            || this.container.getAttribute(`${this.pfx}-cursor`) || '▋';
+        this.startDelay = options.startDelay || 600;
+        //    || parseFloat(this.container.getAttribute(`${this.pfx}-startDelay`)) || 600;
+        this.typeDelay = options.typeDelay || 90;
+        //    || parseFloat(this.container.getAttribute(`${this.pfx}-typeDelay`)) || 90;
+        this.lineDelay = options.lineDelay || 1500;
+        //    || parseFloat(this.container.getAttribute(`${this.pfx}-lineDelay`)) || 1500;
+        this.progressLength = options.progressLength || 40;
+        //    || parseFloat(this.container.getAttribute(`${this.pfx}-progressLength`)) || 40;
+        this.progressChar = options.progressChar || '█';
+        //    || this.container.getAttribute(`${this.pfx}-progressChar`) || '█';
+		this.progressPercent = options.progressPercent || 100;
+        //    || parseFloat(this.container.getAttribute(`${this.pfx}-progressPercent`)) || 100;
+        this.cursor = options.cursor || '▋';
+        this.autoScrole = options.autoScrole || true;
+        //    || this.container.getAttribute(`${this.pfx}-cursor`) || '▋';
         this.lineData = this.lineDataToElements(options.lineData || []);
         if (!options.noInit) this.init()
     }
@@ -54,19 +55,31 @@ class Termynal {
     init() {
         // Appends dynamically loaded lines to existing line elements.
         this.lines = [...this.container.querySelectorAll(`[${this.pfx}]`)].concat(this.lineData);
-
+        this.container.innerHTML = '';
         /** 
          * Calculates width and height of Termynal container.
          * If container is empty and lines are dynamically loaded, defaults to browser `auto` or CSS.
          */ 
+
+        const innerContainer = document.createElement('div');
         const containerStyle = getComputedStyle(this.container);
+
+        this.container.appendChild(innerContainer);
+        this.container = innerContainer;
+
         this.container.style.width = containerStyle.width !== '0px' ? 
             containerStyle.width : undefined;
         this.container.style.minHeight = containerStyle.height !== '0px' ? 
             containerStyle.height : undefined;
+        
+        this.container = innerContainer;
 
-        this.container.setAttribute('data-termynal', '');
-        this.container.innerHTML = '';
+        innerContainer.style = containerStyle;
+        innerContainer.style.padding = "0"
+        innerContainer.style.overflowY = "auto"
+        innerContainer.style.height = "100%"
+
+        this.container.setAttribute('data-termynal', true);
         this.start();
     }
 
@@ -80,19 +93,19 @@ class Termynal {
             const type = line.getAttribute(this.pfx);
             const delay = line.getAttribute(`${this.pfx}-delay`) || this.lineDelay;
             
-            if (type == 'input') {
+            if (type === 'input') {
                 line.setAttribute(`${this.pfx}-cursor`, this.cursor);
                 await this.type(line);
             }
             
-            else if (type == 'progress') {
+            else if (type === 'progress') {
                 await this.progress(line);
             }
             
             else {
                 this.container.appendChild(line);
             }
-            this.container.scrollTop = this.container.scrollHeight
+            if (this.autoScrole) this.container.scrollTop = this.container.scrollHeight
             await this._wait(delay);
             line.removeAttribute(`${this.pfx}-cursor`);
         }

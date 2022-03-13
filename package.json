@@ -1,18 +1,16 @@
 {
   "name": "react-termynal",
-  "version": "0.0.1",
-  "description": "A nice greeter",
+  "version": "0.0.1b",
+  "description": "A react wrapper, with slight modifications, of termynal js.",
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "dev": "react-scripts start",
-    "rollup": "rollup -c",
     "test": "jest --config jestconfig.json",
-    "build": "tsc",
+    "build": "rollup -c",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepublishOnly": " npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
@@ -55,6 +53,7 @@
     "rollup": "^2.70.0",
     "rollup-plugin-dts": "^4.2.0",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^27.1.3",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
@@ -63,10 +62,5 @@
   "module": "dist/esm/index.js",
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.5.0"
-  }
+  ]
 }
