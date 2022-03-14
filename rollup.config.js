@@ -15,22 +15,24 @@ export default [
       {
         file: packageJson.main,
         format: "cjs",
-        sourcemap: true,
       },
       {
         file: packageJson.module,
         format: "esm",
-        sourcemap: true,
       },
+    ],
+    external: [
+      "react", "react-dom"
     ],
     plugins: [
       resolve(),
       commonjs(),
       typescript({ 
-        tsconfig: "./tsconfig.json"
+        tsconfig: "./tsconfig.json",
+        exclude: ["**/*stories.tsx"]
       }),
       postcss(),
-      terser(),
+      terser()
     ],
   },
   {

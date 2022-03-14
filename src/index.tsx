@@ -1,5 +1,6 @@
 import * as React from "react";
-import { default as TermynalClass } from "./termynal";
+
+import { default as TermynalClass } from "./termynal" 
 import "./termynal.css";
 
 type TermynalProps = {
@@ -16,7 +17,6 @@ type TermynalProps = {
     },
     children?: any
 }
-
 
 type TermynalLineProps = {
     type: "window" | "input" | "plain" | "progress",
@@ -37,7 +37,7 @@ const Termynal = (props: TermynalProps) => {
     }, [])
 
     return (
-            <div 
+        <div 
             id={props.id} 
             data-termynal 
             style={{
@@ -45,7 +45,7 @@ const Termynal = (props: TermynalProps) => {
                 width: "100%",
             }}>
                 {props.children}
-            </div>
+        </div>
     )
 }
 
