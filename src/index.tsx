@@ -1,5 +1,4 @@
-import React from "react";
-import { ReactNode, useEffect, useState } from "react";
+import * as React from "react";
 import { default as TermynalClass } from "./termynal";
 import "./termynal.css";
 
@@ -12,7 +11,7 @@ type TermynalProps = {
         progressLength: number,
         progressChard: string,
         progressPercent: number,
-        cursor: ReactNode,
+        cursor: React.ReactNode,
         autoScrole: boolean
     },
     children?: any
@@ -26,13 +25,13 @@ type TermynalLineProps = {
 }
 
 type ContentType = {
-    children: ReactNode,
+    children: React.ReactNode,
     prompt?: string,
 }
 
 const Termynal = (props: TermynalProps) => {
 
-    useEffect(() => {
+    React.useEffect(() => {
         /* tslint:disable:no-unused-expression */
         new TermynalClass("#" + props.id)
     }, [])

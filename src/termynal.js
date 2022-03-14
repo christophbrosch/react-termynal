@@ -78,6 +78,7 @@ class Termynal {
         innerContainer.style.padding = "0"
         innerContainer.style.overflowY = "auto"
         innerContainer.style.height = "100%"
+        innerContainer.style.width = "100%"
 
         this.container.setAttribute('data-termynal', true);
         this.start();
