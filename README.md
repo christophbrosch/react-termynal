@@ -1,3 +1,5 @@
+# NOT READY FOR USAGE
+
 # React Termynal
 
 react-termynal is a react wrapper around the css/javascript library [termynal.js](https://github.com/ines/termynal).
