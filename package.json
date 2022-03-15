@@ -1,6 +1,6 @@
 {
   "name": "react-termynal",
-  "version": "0.0.1h",
+  "version": "0.0.2",
   "description": "A react wrapper around termynal js.",
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
