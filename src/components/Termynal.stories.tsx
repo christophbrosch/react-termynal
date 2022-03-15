@@ -10,8 +10,6 @@ export default {
 
 const Template: ComponentStory<typeof Termynal> = (args) => 
     <Termynal {...args}>
-        <Plain><p>Hello</p></Plain>
-        <Plain><p>Hello</p></Plain>
     </Termynal>
 
 export const basic = Template.bind({});

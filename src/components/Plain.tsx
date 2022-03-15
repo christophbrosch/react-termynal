@@ -1,27 +1,26 @@
 import React, { useState } from "react"
 import { ReactNode } from "react"
-import Line from "./Line"
 
 type PlainProps = {
     children: ReactNode,
-    active: boolean
 }
 
-const Plain = ({active = false, children}: PlainProps) => {
-    const [done, setDone] = useState(false)
-    const ref = React.createRef()
+const Plain = ({children}: PlainProps) => {
+    const [hidden, setHidden] = useState(true)
     
-    const render = async () => {
-        if (active) {
+    const hide = () => setHidden(true)
+
+    const show = async () => {
+        return (
             new Promise<null>((resolve, reject) => {
-                setDone(true)
+                setHidden(false)
                 resolve(null)
-            })
-        }
+             })
+        )
     }
 
     return (
-        <Line ref={ref} type="plain"> {children}</Line>
+        hidden ? <></>: children
     )
 } 
 

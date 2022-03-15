@@ -16,6 +16,11 @@ type TermynalProps = {
     children?: any
 }
 
+interface Line {
+    hide: () => null,
+    show: () => Promise<null>
+}
+
 const defaultOptions = {
     startDelay: 600,
     typeDelay: 90,
@@ -31,14 +36,15 @@ async function _wait(time: number) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-const Termynal = ({id = "termynal", options = defaultOptions, children}: TermynalProps) => {
+const TermynalContext = React.createContext({
+    lines: [],
+    addLine: () => {}
+})
 
-    useEffect(() => {
-        console.log(children)
-        for (const child in children) {
-            children[child].
-        }
-    })
+const Termynal = ({id = "termynal", options = defaultOptions, children}: TermynalProps) => {
+    const lines: Line[] = []
+    const addLine = (line: Line) => lines.push(line)
+
     return (
         <div className={"termynalContainer"} id={id}>
             <div className={"termynalInnerContainer"}>
