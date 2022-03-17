@@ -1,4 +1,5 @@
 interface Line {
+    type: string,
     hide: () => void,
     show: () => Promise<null>
 }

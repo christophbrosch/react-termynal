@@ -4,9 +4,9 @@
     --color-text-subtle: #a2a2a2;
 }
 
-.termynalContainer {
+.termynal {
     width: 100%;
-    max-width: 100%;
+    height: 100%;
     background: var(--color-bg);
     color: var(--color-text);
     font-size: 18px;
@@ -19,14 +19,19 @@
             box-sizing: border-box;
 }
 
-.termynalContainer::before {
+.termynal__header {
+    display: flex;
+    position: relative;
+    top: -30px;
+}
+
+.termynal__dots {
     content: '';
-    position: fixed;
-    top: 25px;
-    left: 25px;
+    position: relative;
     display: inline-block;
     width: 15px;
     height: 15px;
+    left: -30px;
     border-radius: 50%;
     /* A little hack to display the window buttons in one pseudo element. */
     background: #d9515d;
@@ -34,18 +39,27 @@
             box-shadow: 25px 0 0 #f4c025, 50px 0 0 #3ec930;
 }
 
-.termynalContainer::after {
+.termynal__bash {
     content: 'bash';
-    position: fixed;
+    position: relative;
     color: var(--color-text-subtle);
-    top: 25px;
     left: 0;
     width: 100%;
     text-align: center;
 }
 
-.termynalInnerContainer {
+.termynal__inner {
+    position: relative;
     overflow: auto;
     height: 100%;
     width: 100%;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

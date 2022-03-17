@@ -1,22 +1,8 @@
-import React, { Children, useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import Line from "../interfaces/Line";
 import "../styles/Termynal.css"
 import ThermynalContext from "../contexts/TermynalContext";
-
-type TermynalProps = {
-    id: string,
-    options: {
-        startDelay: number,
-        typeDelay: number,
-        lineDelay: number,
-        progressLength: number,
-        progressChard: string,
-        progressPercent: number,
-        cursor: React.ReactNode,
-        autoScrole: boolean
-    },
-    children?: any
-}
+import TermynalProps from "../types/TermynalProps";
 
 const defaultOptions = {
     startDelay: 600,
@@ -26,26 +12,47 @@ const defaultOptions = {
     progressChard: '█',
     progressPercent: 100,
     cursor: '▋',
-    autoScrole: true
+    autoScrole: true,
+    isLineNumberEnabled: true
 }
 
-async function _wait(time: number) {
-    return new Promise(resolve => setTimeout(resolve, time));
-}
-
-const Termynal = ({id = "termynal", options = defaultOptions, children}: TermynalProps) => {
+const Termynal = ({id = "termynal", name = "bash", options = defaultOptions, children}: TermynalProps) => {
     const lines: Line[] = []
+    let lineNumber: number = 0
 
     useEffect(() => {
-        for (const line of lines) {
-            line.show()
-        }
+        (async () => {
+            for (const line of lines) {
+                if (line.type === "plain") {
+                    line.show()
+                }
+            }
+        })()
     }, [])
+
     return (
-        <div className={"termynalContainer"} id={id}>
-            <div className={"termynalInnerContainer"}>
+        <div className="termynal" id={id}>
+            <div className="termynal__header">
+                <div className="termynal__dots"/>
+                <div className="termynal__bash">
+                    { name }
+                </div>
+            </div>
+            <div className="termynal__inner">
                 <ThermynalContext.Provider value={{
-                    addLine: (line: Line) => lines.push(line)
+                    addLine: (line: Line) => {
+                        lines.push(line)
+                        return null
+                    },
+                    getLineNumber: () => {
+                        if (!options.isLineNumberEnabled) {
+                            return null
+                        }
+                        lineNumber = lineNumber + 1
+                        return lineNumber
+                    },
+                    typeDelay: options.typeDelay,
+                    cursor: options.cursor
                 }}>
                     { children }
                 </ThermynalContext.Provider>

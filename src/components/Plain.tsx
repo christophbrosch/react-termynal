@@ -9,10 +9,11 @@ type PlainProps = {
 const Plain = ({children}: PlainProps) => {
     const [hidden, setHidden] = useState(true)
     const context = useContext(TermynalContext)
+    const [lineNumber, setLineNumber] = useState<number | null>(null)
 
     useEffect(() => {
-        context.addLine({hide: hide, show: show})
-        console.log()
+        context.addLine!({type: "plain", hide, show})
+        setLineNumber(context.getLineNumber!())
     }, [])
 
     const hide = () => setHidden(true)
@@ -26,7 +27,12 @@ const Plain = ({children}: PlainProps) => {
     }
 
     return (
-        hidden ? <></>: children
+        <div style={{display: "flex", alignItems: "center"}}>  
+            {lineNumber !== null ? 
+                <span className="unselectable" 
+                    style={{marginRight: "2rem", fontWeight: "lighter", color: "gray"}}>{lineNumber}</span> : <></> }
+            {hidden ? <></>: <>{children}</> }
+        </div>
     )
 } 
 

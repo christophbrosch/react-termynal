@@ -1,11 +1,6 @@
 import React from "react"
-import Line from "../interfaces/Line"
+import TermynalContextProps from "../types/TermynalContextProps"
 
-const TermynalContext = React.createContext({
-    addLine: (line: Line) => {},
-    typeDelay: 90,
-    progressChard: '█',
-    cursor: '▋'
-})
+const TermynalContext = React.createContext<Partial<TermynalContextProps>>({})
 
 export default TermynalContext

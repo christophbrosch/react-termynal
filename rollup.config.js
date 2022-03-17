@@ -32,7 +32,6 @@ export default [
         exclude: ["**/*stories.tsx"]
       }),
       postcss(),
-      terser()
     ],
   },
   {
