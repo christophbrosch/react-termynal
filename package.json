@@ -1,6 +1,6 @@
 {
   "name": "react-termynal",
-  "version": "0.0.2",
+  "version": "0.0.2a",
   "description": "A react wrapper around termynal js.",
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "typescript"
   ],
   "bugs": {
-    "url": "https://github.com/rahonix/react-termynal/issues"
+    "url": "https://www.github.com/rahonix/react-termynal/issues"
   },
   "homepage": "https://github.com/rahonix/react-termynal#readme",
   "devDependencies": {

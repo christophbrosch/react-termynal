@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Termynal from "./Termynal";
-import Plain from "./Plain";
+import Termynal from "../components/Termynal";
+import Plain from "../components/Plain";
 
 export default {
     title: "ReactComponentLibrary/Termynal",

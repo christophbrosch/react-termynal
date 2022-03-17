@@ -1,12 +1,13 @@
-import {Termynal, Plain, Input} from 'react-termynal';
+import { Termynal, Plain} from 'react-termynal';
 
 function App() {
   return (
-        <Termynal id="container">
-          <Plain>Do you want to install the package? (Y,n)</Plain>
-          <Input>Y</Input>
-          <Plain>Installing:</Plain>
-        </Termynal>
+      <Termynal>
+        <Plain><p>Hi</p></Plain>
+        <Plain><p>Hi</p></Plain>
+        <Plain><p>Hi</p></Plain>
+        <Plain><p>Hi</p></Plain>
+      </Termynal>
   );
 }
 

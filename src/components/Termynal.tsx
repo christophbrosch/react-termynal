@@ -1,5 +1,7 @@
 import React, { Children, useEffect, useState } from "react"
-require("./Termynal.css")
+import Line from "../interfaces/Line";
+import "../styles/Termynal.css"
+import ThermynalContext from "../contexts/TermynalContext";
 
 type TermynalProps = {
     id: string,
@@ -14,11 +16,6 @@ type TermynalProps = {
         autoScrole: boolean
     },
     children?: any
-}
-
-interface Line {
-    hide: () => null,
-    show: () => Promise<null>
 }
 
 const defaultOptions = {
@@ -36,19 +33,22 @@ async function _wait(time: number) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-const TermynalContext = React.createContext({
-    lines: [],
-    addLine: () => {}
-})
-
 const Termynal = ({id = "termynal", options = defaultOptions, children}: TermynalProps) => {
     const lines: Line[] = []
-    const addLine = (line: Line) => lines.push(line)
 
+    useEffect(() => {
+        for (const line of lines) {
+            line.show()
+        }
+    }, [])
     return (
         <div className={"termynalContainer"} id={id}>
             <div className={"termynalInnerContainer"}>
-                { children }
+                <ThermynalContext.Provider value={{
+                    addLine: (line: Line) => lines.push(line)
+                }}>
+                    { children }
+                </ThermynalContext.Provider>
             </div>
         </div>
     )
