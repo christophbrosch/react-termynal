@@ -1,6 +1,6 @@
 type TermynalProps = {
-    id: string,
-    name: string,
+    id?: string,
+    name?: string,
     options?: {
         startDelay: number,
         typeDelay: number,
@@ -9,8 +9,7 @@ type TermynalProps = {
         progressChard: string,
         progressPercent: number,
         cursor: string,
-        autoScrole: boolean,
-        isLineNumberEnabled: boolean
+        autoScrole: boolean
     },
     children?: React.ReactNode
 }

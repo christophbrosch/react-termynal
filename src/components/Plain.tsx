@@ -3,18 +3,17 @@ import { ReactNode } from "react"
 import TermynalContext from "../contexts/TermynalContext"
 
 type PlainProps = {
+    lineNumber: number | null,
     children: ReactNode,
 }
 
-const Plain = ({children}: PlainProps) => {
+const Plain = ({lineNumber = null, children}: PlainProps) => {
     const [hidden, setHidden] = useState(true)
     const context = useContext(TermynalContext)
-    const [lineNumber, setLineNumber] = useState<number | null>(null)
 
     useEffect(() => {
         context.addLine!({type: "plain", hide, show})
-        setLineNumber(context.getLineNumber!())
-    }, [])
+    })
 
     const hide = () => setHidden(true)
     const show = async () => {
@@ -26,12 +25,19 @@ const Plain = ({children}: PlainProps) => {
         )
     }
 
+    // TODO: THIS MESS
     return (
         <div style={{display: "flex", alignItems: "center"}}>  
-            {lineNumber !== null ? 
-                <span className="unselectable" 
-                    style={{marginRight: "2rem", fontWeight: "lighter", color: "gray"}}>{lineNumber}</span> : <></> }
-            {hidden ? <></>: <>{children}</> }
+            { lineNumber &&
+                <span 
+                    className="unselectable" 
+                    style={{marginRight: "2rem", fontWeight: "lighter", color: "gray"}
+                }>
+                    {lineNumber}
+                    {lineNumber.toString().length === 1 && <>&nbsp;</>} 
+                </span> 
+            }   
+            {!hidden && <>{children}</>}
         </div>
     )
 } 

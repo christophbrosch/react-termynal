@@ -12,13 +12,11 @@ const defaultOptions = {
     progressChard: '█',
     progressPercent: 100,
     cursor: '▋',
-    autoScrole: true,
-    isLineNumberEnabled: true
+    autoScrole: true
 }
 
 const Termynal = ({id = "termynal", name = "bash", options = defaultOptions, children}: TermynalProps) => {
     const lines: Line[] = []
-    let lineNumber: number = 0
 
     useEffect(() => {
         (async () => {
@@ -28,13 +26,13 @@ const Termynal = ({id = "termynal", name = "bash", options = defaultOptions, chi
                 }
             }
         })()
-    }, [])
+    })
 
     return (
         <div className="termynal" id={id}>
             <div className="termynal__header">
                 <div className="termynal__dots"/>
-                <div className="termynal__bash">
+                <div className="termynal__bash unselectable">
                     { name }
                 </div>
             </div>
@@ -43,13 +41,6 @@ const Termynal = ({id = "termynal", name = "bash", options = defaultOptions, chi
                     addLine: (line: Line) => {
                         lines.push(line)
                         return null
-                    },
-                    getLineNumber: () => {
-                        if (!options.isLineNumberEnabled) {
-                            return null
-                        }
-                        lineNumber = lineNumber + 1
-                        return lineNumber
                     },
                     typeDelay: options.typeDelay,
                     cursor: options.cursor
